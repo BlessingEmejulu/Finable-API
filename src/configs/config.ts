@@ -1,13 +1,15 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-if (!process.env.MONGO_URI || !process.env.ENC_KEY || !process.env.ENC_IV) {
+const { MONGODB_URI, SECRET_KEY, ENCRYPTION_IV, PORT } = process.env;
+
+if (!MONGODB_URI || !SECRET_KEY || !ENCRYPTION_IV) {
   throw new Error('Missing required environment variables');
 }
 
-export const config = {
-  port: process.env.PORT || 5000,
-  mongoURI: process.env.MONGO_URI,
-  encryptionKey: process.env.ENC_KEY,
-  encryptionIV: process.env.ENC_IV
+export default {
+  MONGODB_URI,
+  SECRET_KEY,
+  ENCRYPTION_IV,
+  PORT: PORT || 5000,
 };
